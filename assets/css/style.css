@@ -1,0 +1,616 @@
+/* ============================================================
+   Metric Biotechnologies — design tokens & base
+
+   Brand:
+     Fonts:   Inter Tight Medium (500)  — wordmark + primary headlines
+              Inter Tight ExtraLight (200) — body, subheads, light display
+     Colors:  #EB5D29 (orange — brand)
+              #5E5E5F (grey — text)
+   ============================================================ */
+
+:root {
+  /* Color */
+  --c-orange: #EB5D29;
+  --c-ink:    #5E5E5F;
+  --c-bg:     #FFFFFF;
+  --c-cream:  #EFEAE5;
+  --c-line:   #E5E5E5;
+  --c-btn-bg: #5E5E5F;
+
+  /* Type */
+  --ff-base: "Inter Tight", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --fw-medium: 500;
+  --fw-light:  200;
+
+  /* Type scale — desktop (1440+) */
+  --fs-brand:    28px;
+  --fs-nav:      22px;
+  --fs-h1:       56px;
+  --fs-h1-contact: 126px;
+  --fs-h2-large: 64px;
+  --fs-h2:       42px;
+  --fs-h3:       32.5px;
+  --fs-body:     22.5px;
+  --fs-footer:   19px;
+  --fs-mark:     164px;
+  --fs-button:   18px;
+  --fs-label:    16px;
+  --fs-cta:      28px;
+
+  /* Layout */
+  --gutter:        50px;
+  --max:           100%;
+  --hdr-pad-y:     21px;
+  --space-to-mark: clamp(60px, 10vw, 160px);  /* gap between content and the big "Metric." */
+  --vstack-gap:    clamp(20px, 2.5vw, 40px);  /* vertical gap between stacked text blocks on home */
+}
+
+/* About page: compress to fit content + flourish + footer in one viewport. */
+/* About + Contact pages fill the viewport; brand mark sticks to the bottom of main so the
+   gap between Metric and the footer matches the home page (30px = 15+15). */
+body.page-about,
+body.page-contact {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+body.page-about main,
+body.page-contact main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+body.page-about .brand-mark {
+  margin-top: auto;
+  padding-top: 0;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+/* Scroll-snap: page 1 anchors at top (header visible),
+   page 2 anchors at bottom (footer visible). */
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+.site-header { scroll-snap-align: start; scroll-snap-stop: always; }
+.site-footer { scroll-snap-align: end;   scroll-snap-stop: always; }
+
+body {
+  font-family: var(--ff-base);
+  font-weight: var(--fw-light);    /* ExtraLight is the default body weight */
+  color: var(--c-ink);
+  background: var(--c-bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.site-header {
+  padding: var(--hdr-pad-y) 0;
+  background: var(--c-bg);
+}
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand {
+  color: var(--c-orange);
+  font-size: var(--fs-brand);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+}
+.site-header .right { display: flex; align-items: center; gap: 22px; }
+.nav-contact {
+  color: var(--c-ink);
+  font-size: var(--fs-nav);
+  font-weight: var(--fw-light);
+}
+.menu-toggle {
+  background: none; border: 0; padding: 6px; cursor: pointer;
+  display: inline-flex; flex-direction: column; gap: 5px;
+}
+.menu-toggle span {
+  width: 22px; height: 1.5px; background: var(--c-ink); display: block;
+}
+
+/* ============================================================
+   Home — Hero
+   ============================================================ */
+.home-hero {
+  position: relative;
+  min-height: calc(100vh - 80px); /* viewport minus header */
+}
+.home-hero-text { position: relative; z-index: 1; }
+.home-hero .container {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  align-items: stretch;
+  gap: 40px;
+}
+.home-hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  gap: 36px;
+}
+.home-hero h1 {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-medium);
+  line-height: 1.1;
+  color: var(--c-ink);
+  margin: 0;
+  max-width: 760px;
+}
+.home-hero-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.home-hero-image img {
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - 80px);
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+}
+
+/* Inline ">" CTA — same font as label, no circle */
+.cta-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  font-size: var(--fs-cta);
+  color: var(--c-ink);
+  font-weight: var(--fw-light);
+  line-height: 1.2;
+  transition: color .2s;
+}
+.cta-link .arrow {
+  display: inline-block;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  line-height: inherit;
+  transition: transform .2s;
+}
+.cta-link:hover { color: var(--c-orange); }
+.cta-link:hover .arrow { transform: translateX(2px); }
+
+/* ============================================================
+   Home — "Make better biologics with us" band
+   ============================================================ */
+.home-band {
+  padding-top: 160px;
+  padding-bottom: 0;
+}
+.home-band .row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-top: var(--vstack-gap);
+}
+.home-band h2 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
+  margin: 0;
+  line-height: 1.2;
+}
+.home-band .row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.home-band h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
+  margin: 0 0 var(--vstack-gap);
+  line-height: 1.2;
+  max-width: 620px;
+}
+.home-band p {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-light);
+  color: var(--c-ink);
+  margin: 0;
+  max-width: 620px;
+  line-height: 1.55;
+}
+.home-band .antibody-img { align-self: end; }
+.home-band .antibody-img img {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+}
+
+/* ============================================================
+   About — hero (two columns)
+   ============================================================ */
+.about-hero {
+  padding: 30px 0 60px;
+}
+.about-hero .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  align-items: start;
+}
+.about-hero h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
+  margin: 0;
+  line-height: 1.15;
+  overflow-wrap: normal;
+}
+.about-hero p {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-light);
+  color: var(--c-ink);
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ============================================================
+   About — team grid
+   ============================================================ */
+.team { padding: 0; }
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  align-items: start;
+}
+.member {
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  gap: 12px;
+  align-items: start;
+}
+.member-img {
+  width: 82%;
+  max-width: none;
+  aspect-ratio: 327 / 514;
+  object-fit: cover;
+  margin: 0;
+}
+.member-info { min-width: 0; }
+.member h3 {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+.member h3 .role {
+  display: block;
+  font-weight: var(--fw-medium);
+}
+.member p {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-light);
+  color: var(--c-ink);
+  margin: 0 0 16px;
+  line-height: 1.55;
+}
+.member .affil {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-light);
+  color: var(--c-ink);
+  line-height: 1.55;
+  display: block;
+}
+
+/* ============================================================
+   Contact
+   ============================================================ */
+.contact-hero { padding: 80px 0 30px; }
+.contact-title {
+  font-size: var(--fs-h1-contact);
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
+  margin: 0;
+  line-height: 1;
+}
+.contact-title .accent { color: var(--c-orange); }
+
+.contact-divider {
+  border: 0;
+  border-top: 1px solid var(--c-line);
+  margin: 30px 0 0;
+}
+
+.contact-body { padding: 70px 0 100px; }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  align-items: start;
+}
+.contact-grid form { max-width: 845px; width: 100%; }
+.req { color: var(--c-orange); }
+.contact-info h2 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+.contact-info p {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-light);
+  color: var(--c-ink);
+  margin: 0 0 6px;
+  line-height: 1.55;
+}
+.contact-info a:hover { color: var(--c-orange); }
+
+/* Form */
+form { display: block; }
+form .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+form .field { margin-bottom: 16px; }
+form .row .field { margin-bottom: 0; }
+form label {
+  display: block;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-light);
+  color: var(--c-ink);
+  margin-bottom: 8px;
+}
+form input,
+form textarea {
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--c-line);
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: var(--fw-light);
+  color: var(--c-ink);
+  border-radius: 0;
+  line-height: 1.4;
+}
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--c-ink);
+}
+form .error {
+  display: none;
+  margin-top: 6px;
+  color: #d23535;
+  font-size: 13px;
+  line-height: 1.3;
+}
+form .error::before {
+  content: "\26A0  ";
+}
+form input:user-invalid {
+  border-color: #d23535;
+}
+form .field:has(input:user-invalid) .error {
+  display: block;
+}
+form textarea {
+  min-height: 74px;
+  resize: vertical;
+}
+form button {
+  width: 100%;
+  padding: 11px 15px;
+  background: var(--c-btn-bg);
+  color: var(--c-cream);
+  border: 0;
+  font: inherit;
+  font-size: 16px;
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: background .2s;
+  text-align: center;
+}
+form button:hover { background: var(--c-orange); }
+
+/* honeypot */
+.hp-field {
+  position: absolute !important;
+  left: -10000px; top: auto;
+  width: 1px; height: 1px;
+  overflow: hidden;
+}
+
+/* ============================================================
+   Big brand mark
+   ============================================================ */
+.brand-mark { padding: var(--space-to-mark) 0 15px; }
+.brand-mark .word {
+  font-size: var(--fs-mark);
+  font-weight: var(--fw-medium);
+  color: var(--c-orange);
+  line-height: 1;
+  margin: 0;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer { padding: 15px 0 20px; }
+.site-footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-links { display: flex; gap: 45px; }
+.footer-links a {
+  font-size: var(--fs-footer);
+  font-weight: var(--fw-light);
+  color: var(--c-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.footer-links a:hover { color: var(--c-orange); }
+.copy {
+  font-size: var(--fs-footer);
+  font-weight: var(--fw-light);
+  color: var(--c-ink);
+}
+
+/* ============================================================
+   Tablet (≤ 1100)
+   ============================================================ */
+@media (max-width: 1100px) {
+  :root {
+    --fs-brand:    22px;
+    --fs-nav:      18px;
+    --fs-h1:       42px;
+    --fs-h1-contact: 96px;
+    --fs-h2-large: 48px;
+    --fs-h2:       31px;
+    --fs-h3:       24px;
+    --fs-body:     18.5px;
+    --fs-footer:   15px;
+    --fs-mark:     112px;
+    --fs-cta:      23px;
+    --gutter:      36px;
+  }
+  .home-hero { min-height: 768px; }
+  .home-hero-image { min-height: 600px; }
+  .about-hero { padding: 100px 0 60px; }
+  .about-hero .grid { gap: 80px; }
+  .team-grid { gap: 60px; }
+  .contact-grid { gap: 100px; }
+  .home-band .row1 { margin-top: 60px; }
+  .footer-links { gap: 30px; }
+}
+
+/* ============================================================
+   Mobile (≤ 700)
+   ============================================================ */
+@media (max-width: 700px) {
+  :root {
+    --fs-brand:    20px;
+    --fs-nav:      18px;
+    --fs-h1:       36px;
+    --fs-h1-contact: 56px;
+    --fs-h2-large: 44px;
+    --fs-h2:       31px;
+    --fs-h3:       20.5px;
+    --fs-body:     17.5px;
+    --fs-footer:   15px;
+    --fs-mark:     60px;
+    --fs-label:    16px;
+    --fs-cta:      22px;
+    --gutter:      15px;
+  }
+  .team-grid { max-width: 100%; }
+  .site-header .right { gap: 18px; }
+
+  .home-hero { min-height: 0; }
+  .home-hero .container { grid-template-columns: 1fr; }
+  .home-hero-text {
+    padding-top: 60px;
+    padding-bottom: 50px;
+    padding-left: 0;
+    padding-right: 0;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .home-hero h1 {
+    font-size: var(--fs-h1);
+    max-width: 360px;
+    line-height: 1.05;
+  }
+  .home-hero-image {
+    width: 100vw;
+    height: 470px;
+  }
+  .home-hero-image img { object-fit: contain; }
+
+  .home-band { padding-top: 60px; }
+  .home-band .row1 {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .home-band h2 {
+    font-size: var(--fs-h2-large);
+    line-height: 1.05;
+    flex: 0 1 auto;
+    max-width: 200px;
+  }
+  .home-band .row1 .cta-link {
+    margin-top: 6px;
+    flex: 0 0 auto;
+  }
+  .home-band .row2 {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .home-band .antibody-img img { width: 100%; max-width: 100%; }
+
+  .about-hero { padding: 60px 0 40px; }
+  .about-hero .grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .team { padding: 30px 0 60px; }
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+  .member-img { max-width: 200px; }
+
+  .contact-hero { padding: 40px 0 20px; }
+  .contact-body { padding: 30px 0 60px; }
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  form .row { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .brand-mark { padding: 60px 0 20px; }
+  .site-footer .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .footer-links { gap: 20px; }
+}

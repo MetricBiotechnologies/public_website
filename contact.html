@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Metric.</title>
+  <meta name="description" content="Get in touch with Metric Biotechnologies. Headquartered in NYC." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contact — Metric." />
+  <meta property="og:description" content="Get in touch with Metric Biotechnologies." />
+  <meta property="og:url" content="https://www.metricbio.tech/contact" />
+  <meta property="og:image" content="https://www.metricbio.tech/assets/images/hero-protein.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="canonical" href="https://www.metricbio.tech/contact" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <script src="scripts/config.js"></script>
+  <script src="scripts/main.js" defer></script>
+</head>
+<body class="page-contact">
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">Metric.</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="contact-hero">
+    <div class="container">
+      <h1 class="contact-title">Contact <span class="accent">Metric.</span></h1>
+    </div>
+  </section>
+
+  <section class="contact-body">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="contact-info">
+          <h2>Headquartered in NYC</h2>
+          <p>Let's start a conversation</p>
+          <p><a href="mailto:founders@metricbio.tech">founders@metricbio.tech</a></p>
+        </div>
+
+        <form id="contact-form" method="POST">
+          <!-- Honeypot: bots will fill this; humans won't see it -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="hp-website">Leave this field empty</label>
+            <input id="hp-website" type="text" name="website" autocomplete="off" tabindex="-1" />
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="first_name">First name <span class="req">*</span></label>
+              <input id="first_name" type="text" name="first_name" placeholder="First name" required />
+              <small class="error">Enter a first name.</small>
+            </div>
+            <div class="field">
+              <label for="last_name">Last name <span class="req">*</span></label>
+              <input id="last_name" type="text" name="last_name" placeholder="Last name" required />
+              <small class="error">Enter a last name.</small>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Email <span class="req">*</span></label>
+            <input id="email" type="email" name="email" placeholder="Email" required />
+            <small class="error">Enter a valid email.</small>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Message"></textarea>
+          </div>
+
+          <button type="submit">Send</button>
+          <p id="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+<footer class="site-footer">
+  <div class="container">
+    <nav class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <span class="copy">© 2026 by Metric Biotechnologies</span>
+  </div>
+</footer>
+
+</body>
+</html>
