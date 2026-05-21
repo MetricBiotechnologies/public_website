@@ -391,9 +391,15 @@ form .row .field { margin-bottom: 0; }
 form label {
   display: block;
   font-size: var(--fs-label);
-  font-weight: var(--fw-light);
+  font-weight: var(--fw-medium);
   color: var(--c-ink);
   margin-bottom: 8px;
+}
+#form-status {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  color: var(--c-ink);
 }
 form input,
 form textarea {

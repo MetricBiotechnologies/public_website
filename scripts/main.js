@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       if (res.ok) {
         form.reset();
-        if (status) status.textContent = "Thanks — we'll be in touch shortly.";
+        if (status) status.textContent = "Thanks! We will be in touch shortly.";
         btn.textContent = "Sent ✓";
       } else {
         if (status) status.textContent = "Something went wrong. Please email founders@metricbio.tech directly.";
