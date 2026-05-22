@@ -74,8 +74,11 @@ html:has(body.page-home) {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
+/* Snap 1: top of doc (header + hero). Snap 2: .page-2 wrapper sized to
+   exactly 100vh, so the snap reaches the true bottom of the page and
+   the hero never bleeds into it. */
 body.page-home .site-header { scroll-snap-align: start; scroll-snap-stop: always; }
-body.page-home .site-footer { scroll-snap-align: end;   scroll-snap-stop: always; }
+body.page-home .site-footer { scroll-snap-align: end; }
 
 body {
   font-family: var(--ff-base);
@@ -210,7 +213,7 @@ a { color: inherit; text-decoration: none; }
    Home — "Make better biologics with us" band
    ============================================================ */
 .home-band {
-  padding-top: 160px;
+  padding-top: clamp(30px, 10vw, 160px);
   padding-bottom: 0;
 }
 .home-band .row1 {
@@ -477,7 +480,7 @@ form button:hover { background: var(--c-orange); }
 /* ============================================================
    Footer
    ============================================================ */
-.site-footer { padding: 15px 0 20px; }
+.site-footer { padding: 15px 0 30px; }   /* extra bottom padding absorbs ~9px scroll-snap-end quirk */
 .site-footer .container {
   display: flex;
   justify-content: space-between;
@@ -516,7 +519,6 @@ form button:hover { background: var(--c-orange); }
     --fs-cta:      23px;
     --gutter:      36px;
   }
-  .home-hero { min-height: 768px; }
   .home-hero-image { min-height: 600px; }
   .about-hero { padding: 100px 0 60px; }
   .about-hero .grid { gap: 80px; }
@@ -531,28 +533,30 @@ form button:hover { background: var(--c-orange); }
    ============================================================ */
 @media (max-width: 700px) {
   :root {
-    --fs-brand:    20px;
-    --fs-nav:      18px;
-    --fs-h1:       36px;
-    --fs-h1-contact: 56px;
-    --fs-h2-large: 44px;
-    --fs-h2:       31px;
-    --fs-h3:       20.5px;
-    --fs-body:     17.5px;
-    --fs-footer:   15px;
-    --fs-mark:     60px;
-    --fs-label:    16px;
-    --fs-cta:      22px;
+    /* Mobile: all sizes scaled by ~0.91 (≥ 1pt reduction across the board) */
+    --fs-brand:    18px;
+    --fs-nav:      16px;
+    --fs-h1:       33px;
+    --fs-h1-contact: 51px;
+    --fs-h2-large: 40px;
+    --fs-h2:       28px;
+    --fs-h3:       18.5px;
+    --fs-body:     16px;
+    --fs-footer:   13.5px;
+    --fs-mark:     54px;
+    --fs-label:    15px;
+    --fs-cta:      20px;
     --gutter:      15px;
   }
   .team-grid { max-width: 100%; }
   .site-header .right { gap: 18px; }
 
-  .home-hero { min-height: 0; }
+  /* mobile inherits desktop min-height: calc(100vh - 80px) so hero fills viewport
+     and never lets the next section bleed in */
   .home-hero .container { grid-template-columns: 1fr; }
   .home-hero-text {
-    padding-top: 60px;
-    padding-bottom: 50px;
+    padding-top: clamp(20px, 8vw, 60px);
+    padding-bottom: clamp(20px, 6vw, 50px);
     padding-left: 0;
     padding-right: 0;
     align-items: flex-start;
@@ -563,13 +567,26 @@ form button:hover { background: var(--c-orange); }
     max-width: 360px;
     line-height: 1.05;
   }
+  /* Lock hero to exactly one viewport (minus the header) and flex the image into
+     whatever vertical space remains after the H1/CTA. */
+  .home-hero { height: calc(100vh - 62px); min-height: 0; }
+  .home-hero .container { display: flex; flex-direction: column; height: 100%; }
+  .home-hero-text { flex: 0 0 auto; }
   .home-hero-image {
+    flex: 1 1 auto;
+    min-height: 0;
     width: 100vw;
-    height: 470px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .home-hero-image img { object-fit: contain; }
-
-  .home-band { padding-top: 60px; }
+  .home-hero-image img {
+    width: auto;
+    height: 100%;
+    max-width: 80vw;
+    object-fit: contain;
+  }
+  /* .home-band padding-top now handled by clamp() at top of rule */
   .home-band .row1 {
     flex-direction: row;
     align-items: flex-start;
@@ -613,10 +630,6 @@ form button:hover { background: var(--c-orange); }
   form .row { grid-template-columns: 1fr 1fr; gap: 12px; }
 
   .brand-mark { padding: 60px 0 20px; }
-  .site-footer .container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
+  .copy-long { display: none; }   /* show only "© 2026" on small screens */
   .footer-links { gap: 20px; }
 }
