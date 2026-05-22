@@ -68,14 +68,14 @@ body.page-about .brand-mark {
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
-/* Scroll-snap: page 1 anchors at top (header visible),
-   page 2 anchors at bottom (footer visible). */
-html {
+/* Scroll-snap: only on home page (page 1 = header at top, page 2 = footer at bottom).
+   About/contact pages scroll normally. */
+html:has(body.page-home) {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
-.site-header { scroll-snap-align: start; scroll-snap-stop: always; }
-.site-footer { scroll-snap-align: end;   scroll-snap-stop: always; }
+body.page-home .site-header { scroll-snap-align: start; scroll-snap-stop: always; }
+body.page-home .site-footer { scroll-snap-align: end;   scroll-snap-stop: always; }
 
 body {
   font-family: var(--ff-base);
